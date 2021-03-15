@@ -7,44 +7,57 @@ namespace Garage
     {
         static void Main(string[] args)
         {
-            Zero fxs = new Zero()
+            Zero fxs = new Zero();
+            Zero fx = new Zero();
+            Tesla modelS = new Tesla();
+
+            List<IElectricVehicle> electricVehicles = new List<IElectricVehicle>() {
+                fx, fxs, modelS
+              };
+            Console.WriteLine("------------------------");
+            Console.WriteLine("Electric Vehicles");
+            foreach (IElectricVehicle ev in electricVehicles)
             {
-                MainColor = "White Lightning"
-            };
-            Tesla modelS = new Tesla()
+                Console.WriteLine($"The Vehivle is {ev.CurrentChargePercentage}% charged");
+            }
+
+            foreach (IElectricVehicle ev in electricVehicles)
             {
-                MainColor = "Red Hot"
-            };
+                // This should charge the vehicle to 100%
+                ev.ChargeBattery();
+            }
 
-            Cessna mx410 = new Cessna()
+            foreach (IElectricVehicle ev in electricVehicles)
             {
-                MainColor = "Brownie Town"
-            };
-            Ram bigBoy = new Ram()
+                Console.WriteLine($"The vehicle is now {ev.CurrentChargePercentage}% charged!");
+            }
+
+            /***********************************************/
+
+            Ram ram = new Ram();
+            Cessna cessna150 = new Cessna();
+
+            List<IGasVehicle> gasVehicles = new List<IGasVehicle>() {
+                ram, cessna150
+              };
+            Console.WriteLine("------------------------");
+            Console.WriteLine("Gas Vehicles");
+            foreach (IGasVehicle gv in gasVehicles)
             {
-                MainColor = "Ice Baby Blue"
-            };
+                Console.WriteLine($"The tank is {gv.CurrentTankPercentage}% full");
+            }
 
+            foreach (IGasVehicle gv in gasVehicles)
+            {
+                // This should completely refuel the gas tank
+                gv.RefuelTank();
+            }
 
-            Console.WriteLine("--------------");
-            fxs.Drive();
-            fxs.Turn("Lefty Loose-y");
-            fxs.Stop();
+            foreach (IGasVehicle gv in gasVehicles)
+            {
+                Console.WriteLine($"The tank is now {gv.CurrentTankPercentage}% full!");
+            }
 
-            Console.WriteLine("--------------");
-            modelS.Drive();
-            modelS.Stop();
-            modelS.Turn("Righty tighty");
-
-            Console.WriteLine("--------------");
-            mx410.Drive();
-            mx410.Stop();
-            mx410.Turn("downtown");
-
-            Console.WriteLine("--------------");
-            bigBoy.Drive();
-            bigBoy.Stop();
-            bigBoy.Turn("brings it around town");
 
         }
     }
